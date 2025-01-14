@@ -2,6 +2,7 @@ package controller
 
 import (
 	"log"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/ihajar/gofiber-react-blog/database"
@@ -14,6 +15,8 @@ func BlogList(c *fiber.Ctx) error {
 		"statusText": "Ok",
 		"msg":        "Blog list",
 	}
+
+	time.Sleep(time.Microsecond * 1500)
 
 	db := database.DBConn
 
