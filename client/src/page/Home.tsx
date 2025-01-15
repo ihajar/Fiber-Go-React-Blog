@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/c
 import "../index.css"
 import { Link } from "react-router-dom";
 import { Loader } from "lucide-react";
+import AddBlog from "./AddBlog";
 
 const Home = () => {
     const [apiData, setApiData] = useState<any[]>([]);
@@ -34,6 +35,10 @@ const Home = () => {
     return () => {}
     }, []);
 
+  const handleAddBlog = (newBlog: any) => {
+    setApiData((prev) => [newBlog, ...prev]);
+  };
+
   if (loading) {
     return (
       <>
@@ -46,6 +51,9 @@ const Home = () => {
       <div className='flex flex-col items-center justify-center h-full w-full px-4'>
         <div className='flex-col col-span-12 py-2 mb-4'>
           <h1 className='font-bold text-center text-xl'>React Web App with Go Fiber Backend</h1>
+        </div>
+        <div className="flex justify-end w-full max-w-4xl mb-4">
+          <AddBlog onAdd={handleAddBlog} />
         </div>
         {apiData && apiData.length > 0 ? (
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl'>
