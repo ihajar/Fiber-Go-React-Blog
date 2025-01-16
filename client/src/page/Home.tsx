@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
 import axios from "axios";
-import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/components/ui/card";
 
 import "../index.css"
 import { Link } from "react-router-dom";
-import { Loader } from "lucide-react";
+import {EditIcon, Loader, TrashIcon } from "lucide-react";
 import AddBlog from "./AddBlog";
+import { Button } from "@/components/ui/button";
 
 const Home = () => {
     const [apiData, setApiData] = useState<any[]>([]);
@@ -47,7 +48,7 @@ const Home = () => {
     )
   }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-8">
       <div className='flex flex-col items-center justify-center h-full w-full px-4'>
         <div className='flex-col col-span-12 py-2 mb-4'>
           <h1 className='font-bold text-center text-xl'>React Web App with Go Fiber Backend</h1>
@@ -67,6 +68,14 @@ const Home = () => {
                 </CardTitle>
                 <CardDescription className='text-gray-600'>{record.post}</CardDescription>
               </CardContent>
+              <CardFooter className="w-full flex justify-between space-x-3">
+                <Button variant="outline">
+                  <Link to={`blog/${record.id}`}>
+                    <EditIcon className="size-5 text-emerald-600" />
+                  </Link>
+                </Button>
+                <Button variant='destructive'><TrashIcon className="size-5" /></Button>
+              </CardFooter>
             </Card>
           ))}
           </div>
