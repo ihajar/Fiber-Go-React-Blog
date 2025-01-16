@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import {EditIcon, Loader, TrashIcon } from "lucide-react";
 import AddBlog from "./AddBlog";
 import { Button } from "@/components/ui/button";
+import DeleteBlog from "./DeleteBlog";
 
 const Home = () => {
     const [apiData, setApiData] = useState<any[]>([]);
@@ -40,6 +41,10 @@ const Home = () => {
     setApiData((prev) => [newBlog, ...prev]);
   };
 
+  const handleDeleteBlog = (deletedBlogId: string) => {
+    setApiData((prev) => prev.filter((blog) => blog.id != deletedBlogId));
+  };
+
   if (loading) {
     return (
       <>
@@ -70,11 +75,17 @@ const Home = () => {
               </CardContent>
               <CardFooter className="w-full flex justify-between space-x-3">
                 <Button variant="outline">
-                  <Link to={`blog/${record.id}`}>
+                  <Link to={`blog/${record.id}`} className="flex flex-row justify-start gap-x-2">
                     <EditIcon className="size-5 text-emerald-600" />
+                    <span className="text-emerald-600">Edit</span>
                   </Link>
                 </Button>
-                <Button variant='destructive'><TrashIcon className="size-5" /></Button>
+                {/* Integrating deleteBlog here */}
+                {/* <Button variant='destructive' className="flex flex-row justify-start gap-x-2">
+                  <TrashIcon className="size-5" />
+                  <span>Delete</span>
+                </Button> */}
+                <DeleteBlog blogId={record.id} onDelete={handleDeleteBlog} />
               </CardFooter>
             </Card>
           ))}
